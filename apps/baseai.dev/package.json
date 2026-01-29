@@ -11,7 +11,7 @@
 	},
 	"browserslist": "defaults, not ie <= 11",
 	"dependencies": {
-		"@algolia/autocomplete-core": "^1.7.3",
+		"@algolia/autocomplete-core": "^1.19.4",
 		"@cloudflare/workers-types": "^4.20240405.0",
 		"@headlessui/react": "^2.2.0",
 		"@headlessui/tailwindcss": "^0.2.0",
