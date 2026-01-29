@@ -1,4 +1,5 @@
-export function IconDown(props: JSX.IntrinsicElements['svg']) {
+import React from 'react';
+export function IconDown(props: React.SVGProps<SVGSVGElement>) {
 	return (
 		<svg
 			{...props}

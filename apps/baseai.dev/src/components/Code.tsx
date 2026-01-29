@@ -1,6 +1,6 @@
 'use client';
 
-import { Tab } from '@headlessui/react';
+import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
 import clsx from 'clsx';
 import {
 	Children,
@@ -150,9 +150,10 @@ function CodePanel({
 	let child = Children.only(children);
 
 	if (isValidElement(child)) {
-		tag = child.props.tag ?? tag;
-		label = child.props.label ?? label;
-		code = child.props.code ?? code;
+		const props = child.props as { tag?: string; label?: string; code?: string };
+		tag = props.tag ?? tag;
+		label = props.label ?? label;
+		code = props.code ?? code;
 	}
 
 	if (!code) {
@@ -207,7 +208,7 @@ function CodeGroupHeader({
 				</h3>
 			)}
 			{/* {hasTabs && ( */}
-				<Tab.List className="-mb-px flex gap-4 text-xs font-medium">
+				<TabList className="-mb-px flex gap-4 text-xs font-medium">
 					{Children.map(children, (child, childIndex) => (
 						<Tab
 							className={clsx(
@@ -218,11 +219,11 @@ function CodeGroupHeader({
 							)}
 						>
 							{getPanelTitle(
-								isValidElement(child) ? child.props : {}
+								isValidElement(child) ? (child.props as { title?: string; language?: string }) : {}
 							)}
 						</Tab>
 					))}
-				</Tab.List>
+				</TabList>
 			{/* )} */}
 		</div>
 	);
@@ -236,13 +237,13 @@ function CodeGroupPanels({
 
 	if (hasTabs) {
 		return (
-			<Tab.Panels>
+			<TabPanels>
 				{Children.map(children, child => (
-					<Tab.Panel>
+					<TabPanel>
 						<CodePanel {...props}>{child}</CodePanel>
-					</Tab.Panel>
+					</TabPanel>
 				))}
-			</Tab.Panels>
+			</TabPanels>
 		);
 	}
 
@@ -251,7 +252,7 @@ function CodeGroupPanels({
 
 function usePreventLayoutShift() {
 	let positionRef = useRef<HTMLElement>(null);
-	let rafRef = useRef<number>();
+	let rafRef = useRef<number | undefined>(undefined);
 
 	useEffect(() => {
 		return () => {
@@ -334,7 +335,7 @@ export function CodeGroup({
 }: React.ComponentPropsWithoutRef<typeof CodeGroupPanels> & { title: string }) {
 	let languages =
 		Children.map(children, child =>
-			getPanelTitle(isValidElement(child) ? child.props : {})
+			getPanelTitle(isValidElement(child) ? (child.props as { title?: string; language?: string }) : {})
 		) ?? [];
 	let tabGroupProps = useTabGroupProps(languages);
 	// let hasTabs = Children.count(children) > 1;
@@ -354,12 +355,12 @@ export function CodeGroup({
 	return (
 		<CodeGroupContext.Provider value={true}>
 			{/* {hasTabs ? ( */}
-			<Tab.Group {...tabGroupProps} className={containerClassName}>
+			<TabGroup {...tabGroupProps} className={containerClassName}>
 				<div className="not-prose">
 					{header}
 					{panels}
 				</div>
-			</Tab.Group>
+			</TabGroup>
 			{/* ) : (
 				<div className={containerClassName}>
 					<div className="not-prose">

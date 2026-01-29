@@ -6,7 +6,7 @@ import {
 	type AutocompleteCollection,
 	type AutocompleteState
 } from '@algolia/autocomplete-core';
-import { Dialog, Transition } from '@headlessui/react';
+import { Dialog, DialogPanel, Transition, TransitionChild } from '@headlessui/react';
 import clsx from 'clsx';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import {
@@ -361,7 +361,7 @@ function SearchDialog({
 	}, [open, setOpen]);
 
 	return (
-		<Transition.Root
+		<Transition
 			show={open}
 			as={Fragment}
 			afterLeave={() => autocomplete.setQuery('')}
@@ -370,7 +370,7 @@ function SearchDialog({
 				onClose={setOpen}
 				className={clsx('fixed inset-0 z-50', className)}
 			>
-				<Transition.Child
+				<TransitionChild
 					as={Fragment}
 					enter="ease-out duration-300"
 					enterFrom="opacity-0"
@@ -380,10 +380,10 @@ function SearchDialog({
 					leaveTo="opacity-0"
 				>
 					<div className="fixed inset-0 bg-zinc-400/25 backdrop-blur-sm dark:bg-black/40" />
-				</Transition.Child>
+				</TransitionChild>
 
 				<div className="fixed inset-0 overflow-y-auto px-4 py-4 sm:px-6 sm:py-20 md:py-32 lg:px-8 lg:py-[15vh]">
-					<Transition.Child
+					<TransitionChild
 						as={Fragment}
 						enter="ease-out duration-300"
 						enterFrom="opacity-0 scale-95"
@@ -392,7 +392,7 @@ function SearchDialog({
 						leaveFrom="opacity-100 scale-100"
 						leaveTo="opacity-0 scale-95"
 					>
-						<Dialog.Panel className="mx-auto transform-gpu overflow-hidden rounded-lg bg-zinc-50 shadow-xl ring-1 ring-zinc-900/7.5 sm:max-w-xl dark:bg-zinc-900 dark:ring-zinc-800">
+						<DialogPanel className="mx-auto transform-gpu overflow-hidden rounded-lg bg-zinc-50 shadow-xl ring-1 ring-zinc-900/7.5 sm:max-w-xl dark:bg-zinc-900 dark:ring-zinc-800">
 							<div {...autocomplete.getRootProps({})}>
 								<form
 									ref={formRef}
@@ -424,11 +424,11 @@ function SearchDialog({
 									</div>
 								</form>
 							</div>
-						</Dialog.Panel>
-					</Transition.Child>
+						</DialogPanel>
+					</TransitionChild>
 				</div>
 			</Dialog>
-		</Transition.Root>
+		</Transition>
 	);
 }
 

@@ -5,7 +5,12 @@ import withSearch from './src/mdx/search.mjs';
 const nextConfig = {
 	pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
 	images: {
-		domains: ['raw.githubusercontent.com/']
+		remotePatterns: [
+			{
+				protocol: 'https',
+				hostname: 'raw.githubusercontent.com',
+			},
+		],
 	},
 	transpilePackages: ['next-mdx-remote'],
 	async redirects() {

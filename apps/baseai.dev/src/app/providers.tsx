@@ -2,7 +2,6 @@
 
 import { useEffect } from 'react';
 import { ThemeProvider, useTheme } from 'next-themes';
-import { RecoilRoot } from 'recoil';
 import { usePathname } from 'next/navigation';
 
 const FORCE_DARK_MODE_PAGES = ['/'];
@@ -41,7 +40,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
 			forcedTheme={website ? 'dark' : undefined}
 		>
 			<ThemeWatcher />
-			<RecoilRoot>{children}</RecoilRoot>
+			{children}
 		</ThemeProvider>
 	);
 }

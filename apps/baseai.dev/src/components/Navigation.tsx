@@ -97,7 +97,7 @@ function NavLink({
 	tag?: string;
 	active?: boolean;
 	isAnchorLink?: boolean;
-	navRef?: React.RefObject<HTMLAnchorElement>;
+	navRef?: React.RefObject<HTMLAnchorElement | null>;
 }) {
 	const number = children?.toString().split('.')[0];
 	const hasNumber = isNaN(parseInt(number!)) === false;

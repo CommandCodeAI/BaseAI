@@ -9,7 +9,7 @@ import {
 	useRef
 } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { Dialog, Transition } from '@headlessui/react';
+import { Dialog, DialogPanel, Transition, TransitionChild } from '@headlessui/react';
 import { motion } from 'framer-motion';
 import { create } from 'zustand';
 
@@ -99,13 +99,13 @@ function MobileNavigationDialog({
 	}
 
 	return (
-		<Transition.Root show={isOpen} as={Fragment}>
+		<Transition show={isOpen} as={Fragment}>
 			<Dialog
 				onClickCapture={onClickDialog}
 				onClose={close}
 				className="fixed inset-0 z-10 lg:hidden"
 			>
-				<Transition.Child
+				<TransitionChild
 					as={Fragment}
 					enter="duration-300 ease-out"
 					enterFrom="opacity-0"
@@ -115,10 +115,10 @@ function MobileNavigationDialog({
 					leaveTo="opacity-0"
 				>
 					<div className="fixed inset-0 top-14 bg-zinc-400/20 backdrop-blur-sm md:top-28 dark:bg-black/40" />
-				</Transition.Child>
+				</TransitionChild>
 
-				<Dialog.Panel>
-					<Transition.Child
+				<DialogPanel>
+					<TransitionChild
 						as={Fragment}
 						enter="duration-500 ease-in-out"
 						enterFrom="-translate-x-full"
@@ -133,10 +133,10 @@ function MobileNavigationDialog({
 						>
 							<Navigation />
 						</motion.div>
-					</Transition.Child>
-				</Dialog.Panel>
+					</TransitionChild>
+				</DialogPanel>
 			</Dialog>
-		</Transition.Root>
+		</Transition>
 	);
 }
 

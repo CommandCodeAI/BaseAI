@@ -1,4 +1,5 @@
-export function IconChat(props: JSX.IntrinsicElements['svg']) {
+import React from 'react';
+export function IconChat(props: React.SVGProps<SVGSVGElement>) {
 	return (
 		<svg
 			{...props}

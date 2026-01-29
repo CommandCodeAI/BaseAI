@@ -1,5 +1,6 @@
+import React from 'react';
 export function IconModeration(
-	props: JSX.IntrinsicElements['svg']
+	props: React.SVGProps<SVGSVGElement>
 ) {
 	return (
 		<svg

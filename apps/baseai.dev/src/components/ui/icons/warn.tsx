@@ -1,4 +1,5 @@
-export function IconWarn(props: JSX.IntrinsicElements['svg']) {
+import React from 'react';
+export function IconWarn(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}

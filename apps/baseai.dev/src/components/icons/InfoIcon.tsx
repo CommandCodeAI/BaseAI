@@ -1,4 +1,5 @@
-export function InfoIcon(props: JSX.IntrinsicElements['svg']) {
+import React from 'react';
+export function InfoIcon(props: React.SVGProps<SVGSVGElement>) {
 	return (
 		<svg viewBox="0 0 16 16" aria-hidden="true" {...props}>
 			<circle cx="8" cy="8" r="8" strokeWidth="0" />

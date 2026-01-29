@@ -1,4 +1,5 @@
-export function IconKeyset(props: JSX.IntrinsicElements['svg']) {
+import React from 'react';
+export function IconKeyset(props: React.SVGProps<SVGSVGElement>) {
 	return (
 		<svg
 			{...props}
