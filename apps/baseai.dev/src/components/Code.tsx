@@ -1,6 +1,6 @@
 'use client';
 
-import { Tab } from '@headlessui/react';
+import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
 import clsx from 'clsx';
 import {
 	Children,
@@ -207,7 +207,7 @@ function CodeGroupHeader({
 				</h3>
 			)}
 			{/* {hasTabs && ( */}
-				<Tab.List className="-mb-px flex gap-4 text-xs font-medium">
+				<TabList className="-mb-px flex gap-4 text-xs font-medium">
 					{Children.map(children, (child, childIndex) => (
 						<Tab
 							className={clsx(
@@ -222,7 +222,7 @@ function CodeGroupHeader({
 							)}
 						</Tab>
 					))}
-				</Tab.List>
+				</TabList>
 			{/* )} */}
 		</div>
 	);
@@ -236,13 +236,13 @@ function CodeGroupPanels({
 
 	if (hasTabs) {
 		return (
-			<Tab.Panels>
+			<TabPanels>
 				{Children.map(children, child => (
-					<Tab.Panel>
+					<TabPanel>
 						<CodePanel {...props}>{child}</CodePanel>
-					</Tab.Panel>
+					</TabPanel>
 				))}
-			</Tab.Panels>
+			</TabPanels>
 		);
 	}
 
@@ -354,12 +354,12 @@ export function CodeGroup({
 	return (
 		<CodeGroupContext.Provider value={true}>
 			{/* {hasTabs ? ( */}
-			<Tab.Group {...tabGroupProps} className={containerClassName}>
+			<TabGroup {...tabGroupProps} className={containerClassName}>
 				<div className="not-prose">
 					{header}
 					{panels}
 				</div>
-			</Tab.Group>
+			</TabGroup>
 			{/* ) : (
 				<div className={containerClassName}>
 					<div className="not-prose">

@@ -4,14 +4,15 @@ import { FrontmatterT } from "@/types/markdown";
 export async function generateMetadata({
 	params
 }: {
-	params: { section: string, slug: string };
+	params: Promise<{ section: string; slug: string }>;
 }) {
+	const { section } = await params;
 	let frontmatter: FrontmatterT;
 
 	if (process.env.NODE_ENV === 'production') {
 		const data = await getDocsBySlug({
 			section: 'docs',
-			slug: params.section
+			slug: section
 		});
 
 		frontmatter = data.frontmatter as unknown as FrontmatterT;
@@ -20,7 +21,7 @@ export async function generateMetadata({
 
 		const data = await getContentBySlugOnDev({
 			type: 'docs',
-			slug: params.section,
+			slug: section,
 			section: 'docs',
 		});
 
@@ -58,7 +59,7 @@ export default async function RootLayout({
 	children
 }: {
 	children: React.ReactNode;
-	params: { section: string };
+	params: Promise<{ section: string }>;
 }) {
 	return <>{children}</>;
 }

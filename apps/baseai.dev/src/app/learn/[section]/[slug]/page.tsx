@@ -5,13 +5,14 @@ import { ContentT } from '@/types/markdown';
 export default async function SingleDocPage({
 	params
 }: {
-	params: { section: string; slug: string };
+	params: Promise<{ section: string; slug: string }>;
 }) {
+	const { section, slug } = await params;
 	let content: ContentT;
 
 	if (process.env.NODE_ENV === 'production') {
 		const docContent = learnContent.find(
-			doc => doc.slug === params.slug && doc.section === params.section
+			doc => doc.slug === slug && doc.section === section
 		);
 
 		content = docContent?.content;
@@ -21,8 +22,8 @@ export default async function SingleDocPage({
 
 		const data = await getContentBySlugOnDev({
 			type: 'learn',
-			slug: params.slug,
-			section: params.section,
+			slug: slug,
+			section: section,
 		});
 
 		content = data.content;
