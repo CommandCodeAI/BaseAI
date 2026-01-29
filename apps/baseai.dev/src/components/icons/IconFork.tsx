@@ -1,4 +1,5 @@
-export function IconFork(props: JSX.IntrinsicElements['svg']) {
+import React from 'react';
+export function IconFork(props: React.SVGProps<SVGSVGElement>) {
 	return (
 		<svg
 			{...props}

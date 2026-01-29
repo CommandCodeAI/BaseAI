@@ -1,4 +1,5 @@
-export function IconInfoCircle(props: JSX.IntrinsicElements['svg']) {
+import React from 'react';
+export function IconInfoCircle(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}

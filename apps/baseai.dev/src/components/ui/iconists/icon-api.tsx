@@ -1,4 +1,5 @@
-export function IconApi(props: JSX.IntrinsicElements['svg']) {
+import React from 'react';
+export function IconApi(props: React.SVGProps<SVGSVGElement>) {
 	return (
 		<svg
 			{...props}
