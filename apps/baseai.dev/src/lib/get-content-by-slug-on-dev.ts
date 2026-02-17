@@ -46,7 +46,8 @@ export async function getContentBySlugOnDev({
 				recmaPlugins: [...recmaPlugins],
 				rehypePlugins: [...rehypePlugins],
 				remarkPlugins: [...remarkPlugins]
-			}
+			},
+			blockJS: false
 		});
 
 		const docsSection = await formatString(section);
