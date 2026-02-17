@@ -47,7 +47,7 @@
 		"mdx-annotations": "^0.1.1",
 		"mxcn": "^2.0.0",
 		"next": "15.5.10",
-		"next-mdx-remote": "^5.0.0",
+		"next-mdx-remote": "^6.0.0",
 		"next-themes": "^0.2.1",
 		"react": "^19",
 		"react-dom": "^19",
