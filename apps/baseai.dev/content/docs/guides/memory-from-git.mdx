@@ -1,0 +1,84 @@
+---
+title: 'Create Memory from Git Repository'
+description: "Create a memory from a git repository using BaseAI CLI."
+tags:
+    - baseai
+    - memory
+    - git
+    - langbase
+section: 'Memory'
+published: 2024-10-08
+modified: 2024-11-26
+---
+
+# Create a Memory from git Repository
+
+Create a memory from a git repository using BaseAI CLI.
+
+---
+
+## Step #1 Create memory in your existing git repository
+
+Create a new memory using the `memory` command in root of project. It will ask you for name and description of the memory.
+
+Let's use the name `chat-with-repo` for this example.
+
+```bash
+npx baseai@latest memory
+```
+
+## Step #2 Allow memory to track git repository
+
+It will also prompt you if you want to create a memory from the current project git repository. Select `yes`.
+```
+Do you want to create memory from current project git repository? (yes/no) yes
+```
+
+It will create a memory at `baseai/memory/chat-with-repo` and track files in the current git repository. It prints the path of the memory created. 
+
+Open that file in your editor, it looks like this:
+
+```ts 
+import {MemoryI} from '@baseai/core';
+
+const chatWithRepoMemory = (): MemoryI => ({
+	name: 'chat-with-repo',
+	description: "My list of docs as memory for an AI agent pipe",
+	git: {
+		enabled: true,
+		include: ['**/*'],
+		gitignore: true,
+		deployedAt: '',
+		embeddedAt: ''
+	}
+});
+
+export default chatWithRepoMemory;
+```
+
+Below is the explanation of the fields in the memory file:
+
+- `enabled`: Set to `true` to enable tracking of git repository.
+- `include`: Follows glob pattern to include files from the git repository. You can change the pattern to include only specific files or directories.
+- `gitignore`: Set to `true` to include `.gitignore` file in the memory.
+- `deployedAt`: Set to the commit hash where the memory was last deployed. It is used to track the changes in the memory for deployment. Try to avoid changing this field manually.
+- `embeddedAt`: Set to the commit hash where the memory was last embedded. It is used to track the changes in the memory for local development. Try to avoid changing this field manually.
+
+## Step #3 Deploy the memory
+
+Commit all the changes to git and deploy. 
+
+```bash
+npx baseai@latest deploy -m chat-with-repo
+```
+
+---
+
+## Tracking changes from Git Repository
+
+That's it! Next time you make changes to the git repository, you can run the `deploy` command again to update the memory. Make sure to commit all the changes before deploying.
+
+Similarly, if you are using memory locally, make sure to `embed` the memory again after commit before running the AI agent pipe. As a result, it automatically updates the memory with the latest changes and record the hashes in the memory file.
+
+---
+

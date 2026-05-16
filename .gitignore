@@ -1,0 +1,26 @@
+.DS_Store
+test-results
+node_modules
+.turbo
+*.log
+.next
+dist
+/dist
+dist-ssr
+*.local
+.env
+.cache
+server/dist
+public/dist
+.turbo
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+.x*
+.del*
+_*
+**/node_modules/
+
+# BaseAI
+**/.baseai/
