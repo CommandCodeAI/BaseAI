@@ -74,7 +74,7 @@
 		"enquirer": "^2.4.1",
 		"eslint": "^9",
 		"eslint-config-next": "15.5.10",
-		"prettier": "^3.1.1",
+		"prettier": "^3.8.3",
 		"prettier-plugin-tailwindcss": "^0.5.11",
 		"sharp": "0.33.1",
 		"wrangler": "^3.50.0"
